@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wagner Sole Distributor Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: 16:9 slides that scale with their own width (cqw units); scroll view by default, Present mode shows one slide full-screen.
+   Brand: Wagner red on white, charcoal type, German flag stripe on the left edge — matches the existing Wagner partner deck. */
+:root {
+  --red: #cf0a2c;
+  --red-soft: #fbe7ea;
+  --ink: #1f2226;
+  --ink-2: #4a4f57;
+  --muted: #7b818a;
+  --rule: #e2e4e8;
+  --tint: #f3f4f6;
+  --paper: #ffffff;
+  --ground: #e6e7ea;
+  --black: #111111;
+  --gold: #f2b705;
+  --tbc: #fff3c4;
+  --tbc-line: #d9a400;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Barlow", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- deck shell ---------- */
+.deck {
+  display: grid;
+  gap: 28px;
+  justify-items: center;
+  padding-block: 72px 48px;
+  padding-inline: 16px;
+}
+.toolbar {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.toolbar button {
+  font: 600 14px/1 var(--body);
+  letter-spacing: .02em;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+}
+.toolbar button:hover { background: var(--red); }
+.toolbar button:focus-visible, .slide:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+.counter { font: 500 13px/1 var(--body); color: var(--ink-2); background: var(--paper); padding: 10px 12px; border-radius: 4px; font-variant-numeric: tabular-nums; }
+
+.slide {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  aspect-ratio: 16 / 9;
+  background: var(--paper);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgb(17 17 17 / .08), 0 8px 24px rgb(17 17 17 / .08);
+}
+
+/* German flag stripe */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: .75cqw;
+  background: linear-gradient(var(--black) 0 33.33%, var(--red) 33.33% 66.66%, var(--gold) 66.66% 100%);
+  z-index: 2;
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+  padding: 4.4cqw 5.2cqw 5.4cqw 6cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2cqw;
+}
+.foot {
+  position: absolute;
+  left: 6cqw; right: 5.2cqw; bottom: 2.1cqw;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font: 700 1cqw/1 var(--display);
+  letter-spacing: .06em;
+  color: var(--red);
+}
+.foot span:last-child { font: 400 .95cqw/1 var(--body); color: var(--muted); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+
+/* ---------- type ---------- */
+h1, h2, h3, h4 { font-family: var(--display); margin: 0; text-wrap: balance; color: var(--ink); }
+h2 { font-weight: 700; font-size: 4.3cqw; line-height: 1.02; letter-spacing: -.005em; }
+h3 { font-weight: 700; font-size: 2cqw; line-height: 1.1; }
+h4 { font-weight: 600; font-size: 1.55cqw; line-height: 1.15; }
+p { margin: 0; }
+.lede { font-size: 1.55cqw; line-height: 1.5; color: var(--ink-2); max-width: 62ch; margin-top: -1cqw; }
+.body { font-size: 1.32cqw; line-height: 1.55; color: var(--ink-2); }
+.small { font-size: 1.08cqw; line-height: 1.5; color: var(--muted); }
+.eyebrow { font: 600 1.05cqw/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.red { color: var(--red); }
+strong { font-weight: 600; color: var(--ink); }
+.tbc {
+  background: var(--tbc);
+  border-bottom: .14cqw dashed var(--tbc-line);
+  padding: 0 .3cqw;
+  white-space: nowrap;
+}
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- reusable blocks ---------- */
+.cols { display: grid; gap: 2.6cqw; flex: 1; min-height: 0; }
+.cols > * { min-width: 0; }
+.c2 { grid-template-columns: 1fr 1fr; }
+.c3 { grid-template-columns: repeat(3, 1fr); }
+.c-photo { grid-template-columns: 1.25fr 1fr; align-items: stretch; }
+.photo { width: 100%; height: 100%; object-fit: cover; display: block; max-width: 100%; }
+.photo-frame { position: relative; min-height: 0; overflow: hidden; }
+
+.topbar { border-top: .45cqw solid var(--red); padding-top: 1.4cqw; display: grid; gap: .8cqw; align-content: start; }
+
+.rows { border-top: .2cqw solid var(--ink); display: grid; }
+.row { display: grid; grid-template-columns: 26% 1fr; gap: 2cqw; align-items: center; padding-block: 1.25cqw; border-bottom: .08cqw solid var(--rule); }
+.row h4 { font-size: 1.75cqw; }
+
+.stat b { display: block; white-space: nowrap; font: 700 4.6cqw/0.95 var(--display); color: var(--red); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.stat > span { display: block; margin-top: .6cqw; font-size: 1.12cqw; line-height: 1.4; color: var(--ink-2); }
+
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: .9cqw; }
+.list li { position: relative; padding-left: 1.6cqw; font-size: 1.32cqw; line-height: 1.45; color: var(--ink-2); }
+.list li::before { content: ""; position: absolute; left: 0; top: .78cqw; width: .8cqw; height: .18cqw; background: var(--red); }
+
+/* ---------- logo ---------- */
+.logo { justify-self: start; align-self: flex-start; display: inline-grid; border: .28cqw solid var(--red); background: var(--paper); padding: .7cqw 1.3cqw .6cqw; justify-items: start; }
+.logo b { font: 700 3cqw/0.9 var(--display); color: var(--red); letter-spacing: .04em; }
+.logo i { font: 400 .95cqw/1.3 var(--body); font-style: normal; color: var(--ink); margin-top: .3cqw; }
+
+/* ---------- slide 1: cover ---------- */
+.cover { background: var(--ink); }
+.cover .inner { right: 49%; justify-content: center; gap: 2.4cqw; }
+.cover h1 { color: var(--paper); font-weight: 700; font-size: 5.6cqw; line-height: .98; }
+.cover .lede { color: #c9ccd1; margin: 0; max-width: 36ch; }
+.cover .meta { border-top: .08cqw solid #3a3e44; padding-top: 1.4cqw; font-size: 1.15cqw; color: #9aa0a8; }
+.cover .photo-frame { position: absolute; inset: 0 0 0 51%; }
+.cover .photo { height: 112%; object-position: 50% 0; }
+
+/* ---------- agenda ---------- */
+.agenda { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 4cqw; counter-reset: ag; border-top: .2cqw solid var(--ink); }
+.agenda li { counter-increment: ag; display: grid; grid-template-columns: 4.2cqw 1fr; align-items: baseline; padding-block: 1.35cqw; border-bottom: .08cqw solid var(--rule); font: 600 2.1cqw/1.1 var(--display); }
+.agenda li::before { content: counter(ag, decimal-leading-zero); font: 700 1.5cqw/1 var(--display); color: var(--red); }
+.agenda li small { grid-column: 2; font: 400 1.1cqw/1.4 var(--body); color: var(--muted); margin-top: .35cqw; }
+
+/* ---------- sectors ---------- */
+.sectors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: .08cqw solid var(--rule); border-left: .08cqw solid var(--rule); }
+.sector { padding: 1.5cqw 1.7cqw; border-right: .08cqw solid var(--rule); border-bottom: .08cqw solid var(--rule); display: grid; gap: .5cqw; align-content: start; }
+.sector .tag { font: 600 1.05cqw/1.3 var(--body); color: var(--red); }
+.sector.later { background: var(--tint); }
+.sector.later .tag { color: var(--muted); }
+
+/* ---------- product grid ---------- */
+.products { display: grid; grid-template-columns: repeat(3, 1fr); border-top: .08cqw solid var(--rule); }
+.prod { padding: 1.15cqw 1.6cqw 1.15cqw 0; border-bottom: .08cqw solid var(--rule); display: grid; gap: .25cqw; }
+.prod + .prod:not(:nth-child(3n+1)) { padding-left: 1.6cqw; border-left: .08cqw solid var(--rule); }
+.prod h4 { font-size: 1.6cqw; }
+.prod .brand { font: 600 1.05cqw/1.2 var(--body); color: var(--red); }
+.prod p { font-size: 1.02cqw; line-height: 1.4; color: var(--ink-2); }
+.packs { display: flex; gap: .8cqw; align-items: center; font-size: 1.1cqw; color: var(--ink-2); }
+.packs span { font: 600 1.15cqw/1 var(--display); border: .1cqw solid var(--ink); padding: .45cqw .7cqw; color: var(--ink); }
+
+/* ---------- market bar ---------- */
+.split { display: grid; gap: 1.2cqw; }
+.split-bar { display: flex; height: 6cqw; }
+.split-bar div { display: flex; align-items: center; padding-inline: 1.4cqw; font: 700 2.6cqw/1 var(--display); color: var(--paper); }
+.split-bar .a { background: var(--red); width: 45%; }
+.split-bar .b { background: var(--ink); width: 55%; }
+.split-legend { display: grid; grid-template-columns: 45% 55%; }
+.split-legend div { display: grid; gap: .3cqw; padding-right: 1.4cqw; }
+
+/* ---------- process (import) ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.6cqw; position: relative; }
+.step { display: grid; gap: 1cqw; align-content: start; }
+.step .dot { width: 3.6cqw; height: 3.6cqw; border-radius: 50%; background: var(--red); color: var(--paper); display: grid; place-items: center; font: 700 1.6cqw/1 var(--display); position: relative; z-index: 1; }
+.steps::before { content: ""; position: absolute; top: 1.8cqw; left: 1.8cqw; right: 0; height: .15cqw; background: var(--ink); }
+
+/* ---------- sales chart ---------- */
+.chart { display: grid; grid-template-columns: 5.5cqw 1fr; grid-template-rows: 1fr auto; gap: .6cqw .8cqw; height: 100%; min-height: 0; }
+.yaxis { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; font-size: .95cqw; color: var(--muted); font-variant-numeric: tabular-nums; padding-bottom: 0; }
+.plot { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: .6cqw; align-items: end; border-bottom: .12cqw solid var(--ink); background: linear-gradient(var(--rule), var(--rule)) 0 0 / 100% .08cqw no-repeat, linear-gradient(var(--rule), var(--rule)) 0 50% / 100% .08cqw no-repeat; }
+.bar { background: var(--ink); position: relative; }
+.bar.q1 { background: var(--ink-2); height: 50%; }
+.bar.q2 { background: var(--red); height: 100%; }
+.xaxis { grid-column: 2; display: grid; grid-template-columns: repeat(12, 1fr); gap: .6cqw; font-size: .95cqw; color: var(--muted); text-align: center; }
+.key { display: flex; gap: 2cqw; font-size: 1.05cqw; color: var(--ink-2); }
+.key i { display: inline-block; width: 1cqw; height: 1cqw; margin-right: .5cqw; vertical-align: -.1cqw; }
+
+/* ---------- tables ---------- */
+table { border-collapse: collapse; width: 100%; font-size: 1.3cqw; }
+th { font: 600 1cqw/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 1cqw .9cqw 0; border-bottom: .2cqw solid var(--ink); }
+td { padding: 1.05cqw 1cqw 1.05cqw 0; border-bottom: .08cqw solid var(--rule); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+td.r, th.r { text-align: right; padding-right: 0; }
+tr.total td { border-bottom: 0; border-top: .2cqw solid var(--ink); font: 700 2.1cqw/1 var(--display); color: var(--ink); }
+tr.total td.r { color: var(--red); }
+
+/* ---------- ERP flow ---------- */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1cqw; }
+.flow div { background: var(--tint); padding: 1.6cqw 1.4cqw; display: grid; gap: .7cqw; align-content: start; border-top: .45cqw solid var(--red); }
+.flow b { font: 700 1.3cqw/1 var(--display); color: var(--red); }
+
+/* ---------- gallery ---------- */
+.gallery { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1cqw; flex: 1; min-height: 0; }
+.gallery .photo-frame:first-child { grid-row: span 2; }
+
+/* ---------- closing ---------- */
+.closing { background: var(--ink); }
+.closing h2 { color: var(--paper); font-size: 6.4cqw; }
+.closing .body, .closing .small { color: #c9ccd1; }
+.closing .foot span:last-child { color: #9aa0a8; }
+.contact { display: grid; grid-template-columns: repeat(3, auto); gap: 4cqw; justify-content: start; border-top: .08cqw solid #3a3e44; padding-top: 2cqw; }
+.contact .eyebrow { margin-bottom: .8cqw; }
+.contact .body { color: var(--paper); }
+
+/* ---------- present mode ---------- */
+body.presenting { background: var(--black); overflow: hidden; }
+body.presenting .deck { padding: 0; height: 100vh; height: 100dvh; display: grid; place-items: center; }
+body.presenting .slide { display: none; box-shadow: none; width: min(100vw, calc(100dvh * 16 / 9)); max-width: none; }
+body.presenting .slide.active { display: block; }
+body.presenting .toolbar { opacity: 0; transition: opacity .2s; }
+body.presenting .toolbar:hover, body.presenting .toolbar:focus-within { opacity: 1; }
+
+@media (max-width: 560px) {
+  .deck { gap: 16px; padding-block: 64px 32px; }
+}
+@media print {
+  @page { size: 1280px 720px; margin: 0; }
+  body { background: var(--paper); }
+  .toolbar { display: none; }
+  .deck { padding: 0; gap: 0; display: block; }
+  .slide { width: 1280px; max-width: none; box-shadow: none; break-after: page; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="counter" id="counter">18 slides</span>
+  <button type="button" id="present">Present</button>
+</div>
+
+<main class="deck" id="deck">
+
+<!-- 1 · Cover -->
+<section class="slide cover" tabindex="-1" aria-label="Cover">
+  <div class="inner">
+    <div class="logo"><b>WAGNER</b><i>High Quality Lubricants</i></div>
+    <h1>Business proposal for sole distributor, Bangladesh</h1>
+    <p class="lede">German-engineered lubricants for cars, bikes, trucks and industry. One partner to import, distribute and build the Wagner brand nationwide.</p>
+    <p class="meta">Partner presentation · 2026</p>
+  </div>
+  <div class="photo-frame"><img class="photo" src="assets/photos/automechanika-dubai-2024.jpg" alt="Wagner 75W90 gear oil and 5W30 motor oil cans at Automechanika Dubai"></div>
+</section>
+
+<!-- 2 · Contents -->
+<section class="slide" tabindex="-1" aria-label="Contents">
+  <div class="inner">
+    <h2>What this proposal covers</h2>
+    <ol class="agenda">
+      <li>Opportunities<small>Sectors Wagner can serve in Bangladesh</small></li>
+      <li>Market share<small>Size of the market and the branded share</small></li>
+      <li>Sole distributor responsibilities<small>Import, distribution, corporate, B2B, B2C and e-commerce</small></li>
+      <li>Sales policy<small>Container targets and annual incentive</small></li>
+      <li>Marketing policy<small>Who runs what, and the marketing budget</small></li>
+      <li>Sole distributor profitability<small>Margin, incentive, investment and ROI</small></li>
+      <li>ERP system<small>How stock and orders are tracked</small></li>
+    </ol>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>2</span></div>
+</section>
+
+<!-- 3 · About Wagner -->
+<section class="slide" tabindex="-1" aria-label="About Wagner">
+  <div class="inner">
+    <div class="cols c-photo">
+      <div style="display:grid;gap:2.2cqw;align-content:start">
+        <h2>Engineered in Germany to cut wear to the minimum</h2>
+        <p class="body">Wagner Spezialschmierstoffe GmbH &amp; Co. KG is based in Wechingen, Bavaria. Founder and engineer Walter Wagner has spent more than 25 years developing lubricants and coolants that reduce friction and wear, extend service intervals and lower maintenance costs for cars, heavy trucks and industrial plants.</p>
+        <div class="cols c3" style="flex:none;margin-top:1cqw">
+          <div class="stat"><b>25+ yrs</b><span>of lubrication research behind the range</span></div>
+          <div class="stat"><b>40+</b><span>countries where Wagner is sold</span></div>
+          <div class="stat"><b>9</b><span>product families, from engine oils to coolants</span></div>
+        </div>
+      </div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/booth-exterior.jpg" alt="Wagner High Quality Lubricants stand with made in Germany signage"></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>3</span></div>
+</section>
+
+<!-- 4 · Partnerships -->
+<section class="slide" tabindex="-1" aria-label="Partnerships">
+  <div class="inner">
+    <h2>Already building partnerships across the region</h2>
+    <p class="lede">At Automechanika Dubai, 10–12 December 2024, Wagner met distributors and certified authorised partners from across the Middle East and beyond.</p>
+    <div class="gallery">
+      <div class="photo-frame"><img class="photo" src="assets/photos/booth-interior.jpg" alt="Inside the Wagner stand with the 40+ countries world map"></div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/automechanika-2024-authorized-garage-certificate.jpg" alt="Authorised garage certificate presented at the Wagner stand" style="object-position:50% 40%"></div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/automechanika-2024-partner-meeting.jpg" alt="Partner meeting at the Wagner stand" style="object-position:50% 45%"></div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/automechanika-2024-booth-meeting.jpg" alt="Distributor discussion at the Wagner stand" style="object-position:50% 40%"></div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/display-rack.jpg" alt="Wagner motor oil display rack" style="object-position:50% 30%"></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>4</span></div>
+</section>
+
+<!-- 5 · Opportunities -->
+<section class="slide" tabindex="-1" aria-label="Opportunities">
+  <div class="inner">
+    <h2>Opportunities</h2>
+    <p class="lede">Six sectors drive lubricant demand in Bangladesh. Wagner's current range covers the first four directly.</p>
+    <div class="sectors">
+      <div class="sector"><h3>Automotive</h3><p class="tag">EvoMaX · CargoX · MotoX · TransX · DriveX</p><p class="small">Cars, bikes, buses and trucks in workshops and retail.</p></div>
+      <div class="sector"><h3>Industrial</h3><p class="tag">HYD hydraulic oils · GEAR industrial gear oils</p><p class="small">Factories, garments, steel and construction plant.</p></div>
+      <div class="sector"><h3>Power</h3><p class="tag">CargoX heavy-duty diesel · Xtreme Cool</p><p class="small">Diesel generators and captive power plants.</p></div>
+      <div class="sector"><h3>Agriculture</h3><p class="tag">CargoX · HYD · TransX</p><p class="small">Tractors, power tillers, pumps and harvesters.</p></div>
+      <div class="sector later"><h3>Marine</h3><p class="tag"><span class="tbc">Product fit to confirm</span></p><p class="small">River vessels, ferries and port equipment.</p></div>
+      <div class="sector later"><h3>Aviation</h3><p class="tag"><span class="tbc">Product fit to confirm</span></p><p class="small">Ground support equipment and airport fleets.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>5</span></div>
+</section>
+
+<!-- 6 · Product range -->
+<section class="slide" tabindex="-1" aria-label="Product range">
+  <div class="inner">
+    <h2>One brand for every engine in the workshop</h2>
+    <div class="products">
+      <div class="prod"><h4>Passenger car engine oils</h4><span class="brand">EvoMaX</span><p>Fully and semi-synthetic, 0W-16 to 20W-50, gasoline and diesel</p></div>
+      <div class="prod"><h4>Heavy-duty diesel oils</h4><span class="brand">CargoX</span><p>CI-4 / E7 grades for trucks, buses, mining and construction</p></div>
+      <div class="prod"><h4>Motorcycle oils</h4><span class="brand">MotoX 4T &amp; 2T</span><p>JASO MA-2 wet-clutch oils, plus 2-stroke</p></div>
+      <div class="prod"><h4>Manual transmission fluids</h4><span class="brand">TransX</span><p>GL-4 and GL-5 gear oils for cars, LCVs and trucks</p></div>
+      <div class="prod"><h4>Automatic transmission fluids</h4><span class="brand">DriveX</span><p>For modern automatic gearboxes and power steering</p></div>
+      <div class="prod"><h4>Hydraulic oils</h4><span class="brand">HYD</span><p>For construction, agricultural and industrial hydraulics</p></div>
+      <div class="prod"><h4>Industrial gear oils</h4><span class="brand">GEAR</span><p>For factory gearboxes and heavy machinery</p></div>
+      <div class="prod"><h4>Brake fluids</h4><span class="brand">BRAKE</span><p>DOT-rated fluids for cars and motorcycles</p></div>
+      <div class="prod"><h4>Antifreeze &amp; coolants</h4><span class="brand">Xtreme Cool</span><p>Premixed 33% and 50%, free of phosphates, silicates and nitrites</p></div>
+    </div>
+    <div class="packs">Available in <span>1L</span><span>4L</span><span>5L</span><span>20L</span><span>208L</span></div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>6</span></div>
+</section>
+
+<!-- 7 · Market share -->
+<section class="slide" tabindex="-1" aria-label="Market share">
+  <div class="inner">
+    <h2>Bangladesh lubricant market</h2>
+    <p class="lede">An estimated <span class="tbc">200 million litres</span> a year across industrial, automotive, power, marine and aviation use. More than half is still unbranded or loose oil.</p>
+    <div class="split" style="margin-top:1.4cqw">
+      <div class="split-bar"><div class="a">45%</div><div class="b">55%</div></div>
+      <div class="split-legend">
+        <div><h4>Branded</h4><p class="small">International and local brands sold in sealed packs</p></div>
+        <div><h4>Non-brand / loose oil</h4><p class="small">Unbranded, refilled and loose oil. This is the share a trusted German brand can convert.</p></div>
+      </div>
+    </div>
+    <div class="cols c3" style="flex:none;margin-top:auto">
+      <div class="stat"><b>3%+</b><span>expected annual market growth (CAGR) over the next five years</span></div>
+      <div class="stat"><b>0.5%</b><span>first-year market share target for the sole distributor</span></div>
+      <div class="stat"><b>5</b><span>key market segments: industrial, automotive, power, marine, aviation</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>7</span></div>
+</section>
+
+<!-- 8 · Responsibilities overview -->
+<section class="slide" tabindex="-1" aria-label="Responsibilities of the sole distributor">
+  <div class="inner">
+    <h2>Responsibilities of the sole distributor</h2>
+    <p class="lede">One partner runs every channel for Wagner in Bangladesh.</p>
+    <div class="rows">
+      <div class="row"><h4>Import</h4><p class="body">Import Wagner lubricants directly from Wagner, Germany</p></div>
+      <div class="row"><h4>Distribution</h4><p class="body">Appoint local distributors across the country under legal contract</p></div>
+      <div class="row"><h4>Corporate sales</h4><p class="body">Build a corporate sales team for industrial and government buyers</p></div>
+      <div class="row"><h4>B2B</h4><p class="body">Generate business-to-business sales with fleets, workshops and dealers</p></div>
+      <div class="row"><h4>B2C &amp; e-commerce</h4><p class="body">Open Wagner premium shops and sell online</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>8</span></div>
+</section>
+
+<!-- 9 · Import -->
+<section class="slide" tabindex="-1" aria-label="Import">
+  <div class="inner">
+    <span class="eyebrow">Responsibilities · Import</span>
+    <h2>From Wechingen to Chattogram</h2>
+    <div class="steps" style="margin-top:2cqw">
+      <div class="step"><div class="dot">1</div><h3>Direct lifting</h3><p class="body">The sole distributor orders and lifts product directly from Wagner in Germany.</p></div>
+      <div class="step"><div class="dot">2</div><h3>Payment by LC</h3><p class="body">Payment to Wagner through a <strong>100% letter of credit at sight</strong>.</p></div>
+      <div class="step"><div class="dot">3</div><h3>Shipment to port</h3><p class="body">Wagner ships to the distributor's local port. Freight is added to the product cost.</p></div>
+    </div>
+    <p class="body" style="margin-top:auto;padding:1.4cqw 1.8cqw;background:var(--tint);border-left:.45cqw solid var(--red)">Customs duty, clearance and all other port expenses are handled by the sole distributor without delay.</p>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>9</span></div>
+</section>
+
+<!-- 10 · Distribution -->
+<section class="slide" tabindex="-1" aria-label="Distribution">
+  <div class="inner">
+    <div class="cols" style="grid-template-columns:1.6fr 1fr">
+      <div style="display:grid;gap:2cqw;align-content:start">
+        <span class="eyebrow">Responsibilities · Distribution</span>
+        <h2>Coverage in every division, district and thana</h2>
+        <div class="rows">
+          <div class="row"><h4>Local distribution</h4><p class="body">Set up local distributors across all divisions, districts and thana markets. <strong>Minimum 50 distributors.</strong> Wagner may audit every market.</p></div>
+          <div class="row"><h4>Manpower</h4><p class="body">Staff operations to industry norms and Wagner's advice.</p></div>
+          <div class="row"><h4>Product placement</h4><p class="body">Place product with retailers across the country, monitored by the distributor's team. <strong>Wagner audits placement every quarter.</strong></p></div>
+        </div>
+      </div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/display-rack.jpg" alt="Wagner motor oil retail display rack" style="object-position:50% 35%"></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>10</span></div>
+</section>
+
+<!-- 11 · Corporate & B2B -->
+<section class="slide" tabindex="-1" aria-label="Corporate and B2B">
+  <div class="inner">
+    <span class="eyebrow">Responsibilities · Corporate &amp; B2B</span>
+    <h2>Corporate and B2B sales</h2>
+    <div class="cols c2" style="flex:none">
+      <div class="topbar"><h3>Corporate</h3><p class="body">Industrial plants and government buyers. A separate, skilled and experienced team manages these accounts.</p></div>
+      <div class="topbar"><h3>B2B</h3><p class="body">Fleets, workshops, dealers and resellers that buy in volume and need regular supply.</p></div>
+    </div>
+    <div class="rows" style="margin-top:2cqw">
+      <div class="row"><h4>Lifting</h4><p class="body">The distributor lifts product from Wagner by LC and delivers it to clients.</p></div>
+      <div class="row"><h4>Targets</h4><p class="body">Wagner sets annual targets for corporate and B2B sales, which the distributor's team delivers.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>11</span></div>
+</section>
+
+<!-- 12 · B2C & e-commerce -->
+<section class="slide" tabindex="-1" aria-label="B2C showrooms and e-commerce">
+  <div class="inner">
+    <div class="cols c-photo">
+      <div style="display:grid;gap:1.8cqw;align-content:start">
+        <span class="eyebrow">Responsibilities · B2C &amp; e-commerce</span>
+        <h2>Wagner premium shops and online sales</h2>
+        <div class="topbar"><h4>Premium shops</h4><p class="body">Each local area distributor opens a Wagner premium shop in the design set by Wagner. The distributor pays the rent and sells from dealer price to MRP at a good margin.</p></div>
+        <div class="topbar"><h4>E-commerce</h4><p class="body">Keep products listed on several e-commerce sites, backed by social media marketing so buyers know the brand.</p></div>
+        <div class="topbar"><h4>Marketing</h4><p class="body">Brand marketing and promotion for the shops is arranged by Wagner.</p></div>
+      </div>
+      <div class="photo-frame"><img class="photo" src="assets/photos/additives-showcase.jpg" alt="Wagner additives showcase cabinet" style="object-position:50% 45%"></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>12</span></div>
+</section>
+
+<!-- 13 · Sales policy -->
+<section class="slide" tabindex="-1" aria-label="Sales policy">
+  <div class="inner">
+    <h2>Sales policy</h2>
+    <div class="cols" style="grid-template-columns:1.35fr 1fr">
+      <div style="display:grid;grid-template-rows:auto 1fr auto;gap:1.2cqw;min-height:0">
+        <p class="small">Monthly volume, litres (40 ft container = 26,000 L)</p>
+        <div class="chart">
+          <div class="yaxis"><span>52,000</span><span>26,000</span><span>0</span></div>
+          <div class="plot" aria-label="Months 1 to 3: 26,000 litres each. Months 4 to 12: 52,000 litres each.">
+            <div class="bar q1"></div><div class="bar q1"></div><div class="bar q1"></div>
+            <div class="bar q2"></div><div class="bar q2"></div><div class="bar q2"></div>
+            <div class="bar q2"></div><div class="bar q2"></div><div class="bar q2"></div>
+            <div class="bar q2"></div><div class="bar q2"></div><div class="bar q2"></div>
+          </div>
+          <div class="xaxis"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span></div>
+        </div>
+        <div class="key"><span><i style="background:var(--ink-2)"></i>Q1: 1 container a month</span><span><i style="background:var(--red)"></i>Q2 onward: 2 containers a month</span></div>
+      </div>
+      <div class="rows" style="align-self:start">
+        <div class="row" style="grid-template-columns:1fr"><h4>Sales target</h4><p class="body">One 40 ft container (26,000 L) a month in the first quarter, then two (52,000 L) a month from the second quarter. Volume rises with market demand.</p></div>
+        <div class="row" style="grid-template-columns:1fr"><h4>Annual target &amp; incentive</h4><p class="body"><span class="tbc">30 containers (≈ 8 lakh litres)</span> a year. On reaching it, the distributor earns <strong>1% of total invoice value</strong> at year end.</p></div>
+        <div class="row" style="grid-template-columns:1fr"><h4>Growth</h4><p class="body">Minimum <strong>25% growth a year</strong> in quantity purchased.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>13</span></div>
+</section>
+
+<!-- 14 · Marketing policy -->
+<section class="slide" tabindex="-1" aria-label="Marketing policy">
+  <div class="inner">
+    <h2>Marketing policy</h2>
+    <div class="cols" style="grid-template-columns:1fr 1fr 1.1fr;flex:none;margin-top:1cqw">
+      <div class="topbar"><h3>Wagner Global</h3><p class="body">Runs brand marketing in line with Wagner's global marketing policy.</p></div>
+      <div class="topbar"><h3>Sole distributor</h3><p class="body">Runs local activity to keep sales and visibility growing: sponsorships, ads, banners and digital marketing.</p></div>
+      <div class="topbar"><h3>Marketing budget</h3><p class="body">Wagner contributes a budget with every shipment, calculated in USD.</p></div>
+    </div>
+    <div style="margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:3cqw;align-items:end;border-top:.2cqw solid var(--ink);padding-top:2cqw">
+      <b style="font:700 11cqw/.8 var(--display);color:var(--red);letter-spacing:-.02em">0.8%</b>
+      <p class="lede" style="margin:0 0 .6cqw">Marketing budget from Wagner of up to 0.8% of the gross order value on every shipment.</p>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>14</span></div>
+</section>
+
+<!-- 15 · Profitability -->
+<section class="slide" tabindex="-1" aria-label="Sole distributor profitability">
+  <div class="inner">
+    <h2>Sole distributor profitability</h2>
+    <p class="lede">Sales profit of <strong>8–10% per container</strong>, depending on market conditions, after operating costs. Year-one model at 8%:</p>
+    <div class="cols" style="grid-template-columns:1.5fr 1fr">
+      <table>
+        <thead><tr><th>Year one</th><th class="r">Litres</th><th class="r">Taka</th></tr></thead>
+        <tbody>
+          <tr><td>Annual sales volume (0.5% market share)</td><td class="r"><span class="tbc">10,00,000</span></td><td class="r"></td></tr>
+          <tr><td>Average selling price per litre</td><td class="r"></td><td class="r">550</td></tr>
+          <tr><td>Annual sales value</td><td class="r"></td><td class="r">55 crore</td></tr>
+          <tr><td>Sales profit at 8%</td><td class="r"></td><td class="r">4.40 crore</td></tr>
+          <tr><td>Target achievement incentive (1%)</td><td class="r"></td><td class="r">0.55 crore</td></tr>
+          <tr class="total"><td>Total profit</td><td></td><td class="r">Tk 4.95 crore</td></tr>
+        </tbody>
+      </table>
+      <div style="display:grid;gap:1cqw;align-content:start;background:var(--tint);padding:1.8cqw">
+        <h4>Why only 0.5% share in year one</h4>
+        <ul class="list">
+          <li>Expanding marketing activity</li>
+          <li>Building the brand image</li>
+          <li>Recruiting and placing manpower</li>
+          <li>Gaining market experience</li>
+          <li>Tracking the competition</li>
+        </ul>
+        <p class="small">Profit is after office, manpower, warehouse, logistics, transport and entertainment costs.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>15</span></div>
+</section>
+
+<!-- 16 · Investment & ROI -->
+<section class="slide" tabindex="-1" aria-label="Investment and ROI">
+  <div class="inner">
+    <h2>Investment and return</h2>
+    <div class="cols c3" style="flex:none;margin-top:1.6cqw">
+      <div class="stat"><b>Tk 2.5 cr</b><span>working investment, about 2.5 containers of stock on average in the first quarter</span></div>
+      <div class="stat"><b>Tk 4.4 cr</b><span>annual return at 8% sales profit</span></div>
+      <div class="stat"><b><span class="tbc" style="font:inherit;padding:0 .4cqw">9 months</span></b><span>minimum break-even period</span></div>
+    </div>
+    <div class="topbar" style="margin-top:auto">
+      <h3>Two months of stock, always rolling</h3>
+      <p class="body" style="max-width:80ch">The investment rolls over every month. The sole distributor keeps two months' days of stock (DOS): one month's stock in shipment and one month's stock in the warehouse.</p>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>16</span></div>
+</section>
+
+<!-- 17 · ERP -->
+<section class="slide" tabindex="-1" aria-label="ERP system">
+  <div class="inner">
+    <h2>ERP system</h2>
+    <p class="lede">Wagner monitors the sole distributor through an ERP system. Five measures are tracked closely.</p>
+    <div class="flow" style="margin-top:1.4cqw">
+      <div><b>01</b><h4>Distributor stock DOS</h4><p class="small">Days of stock held by the sole distributor</p></div>
+      <div><b>02</b><h4>Local distributor stock DOS</h4><p class="small">Days of stock at each local distributor</p></div>
+      <div><b>03</b><h4>Order management</h4><p class="small">Orders from local distributors, corporate and B2B clients</p></div>
+      <div><b>04</b><h4>Delivery tracking</h4><p class="small">Deliveries from warehouse to market</p></div>
+      <div><b>05</b><h4>Shipment management</h4><p class="small">Containers from Germany to port and warehouse</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>17</span></div>
+</section>
+
+<!-- 18 · Thank you / contact -->
+<section class="slide closing" tabindex="-1" aria-label="Thank you and contact">
+  <div class="inner" style="justify-content:space-between">
+    <div class="logo"><b>WAGNER</b><i>High Quality Lubricants</i></div>
+    <div style="display:grid;gap:1.4cqw">
+      <h2>Thank you</h2>
+      <p class="body" style="font-size:1.6cqw">Let's build Wagner in Bangladesh together.</p>
+    </div>
+    <div class="contact">
+      <div><p class="eyebrow">Head office</p><p class="body">Wagner Spezialschmierstoffe GmbH &amp; Co. KG<br>Speckbrodi 8, 86759 Wechingen<br>Germany</p></div>
+      <div><p class="eyebrow">Phone</p><p class="body num">+49 9085 96 00 910</p></div>
+      <div><p class="eyebrow">Web</p><p class="body">wagneroil.de<br>wagner-german-oil.com</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>WAGNER</span><span>18</span></div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var btn = document.getElementById('present');
+  var counter = document.getElementById('counter');
+  var i = 0;
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+  }
+  function start() {
+    var top = window.scrollY + 80;
+    for (var k = 0; k < slides.length; k++) { if (slides[k].offsetTop + slides[k].offsetHeight > top) { i = k; break; } }
+    document.body.classList.add('presenting');
+    btn.textContent = 'Exit';
+    show(i);
+    var el = document.documentElement;
+    if (el.requestFullscreen) { el.requestFullscreen().catch(function () {}); }
+  }
+  function stop() {
+    document.body.classList.remove('presenting');
+    btn.textContent = 'Present';
+    counter.textContent = slides.length + ' slides';
+    if (document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(function () {}); }
+    slides[i].scrollIntoView({ block: 'center' });
+  }
+  function presenting() { return document.body.classList.contains('presenting'); }
+
+  btn.addEventListener('click', function () { presenting() ? stop() : start(); });
+  document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement && presenting()) stop(); });
+  document.addEventListener('keydown', function (e) {
+    if (!presenting()) { if (e.key === 'p' || e.key === 'F5') { e.preventDefault(); start(); } return; }
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].indexOf(e.key) > -1) { e.preventDefault(); show(i + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) > -1) { e.preventDefault(); show(i - 1); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'Escape') stop();
+  });
+  document.getElementById('deck').addEventListener('click', function (e) {
+    if (!presenting()) return;
+    show(e.clientX < window.innerWidth / 3 ? i - 1 : i + 1);
+  });
+})();
+</script>
+</body>
+</html>
